@@ -10,7 +10,19 @@
 .wp-block-create-block-transcription-block {
   background-color: #21759b;
   color: #fff;
-  padding: 2px;
+  padding: 10px;
+}
+.wp-block-create-block-transcription-block .transcription-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.wp-block-create-block-transcription-block .transcription-text-box.hide {
+  transition: height 1s;
+  height: 200px;
+  overflow-y: hidden;
+  -webkit-mask-image: linear-gradient(180deg, rgb(0, 0, 0), transparent 50%);
+          mask-image: linear-gradient(180deg, rgb(0, 0, 0), transparent 50%);
 }
 
 /*# sourceMappingURL=style-index.css.map*/

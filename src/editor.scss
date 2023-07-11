@@ -6,4 +6,17 @@
 
 .wp-block-create-block-transcription-block {
 	border: 1px dotted #f00;
+	padding: 10px;
+	.transcription-header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.transcription-text-box {
+		&.hide {
+			height: 200px;
+			overflow-y: hidden;
+			mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 50%);
+		}
+	}
 }

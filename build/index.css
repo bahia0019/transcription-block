@@ -8,6 +8,18 @@
  */
 .wp-block-create-block-transcription-block {
   border: 1px dotted #f00;
+  padding: 10px;
+}
+.wp-block-create-block-transcription-block .transcription-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.wp-block-create-block-transcription-block .transcription-text-box.hide {
+  height: 200px;
+  overflow-y: hidden;
+  -webkit-mask-image: linear-gradient(180deg, rgb(0, 0, 0), transparent 50%);
+          mask-image: linear-gradient(180deg, rgb(0, 0, 0), transparent 50%);
 }
 
 /*# sourceMappingURL=index.css.map*/

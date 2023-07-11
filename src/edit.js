@@ -1,41 +1,62 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
-import { __ } from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
+import { Button, PanelBody, ToggleControl } from "@wordpress/components";
+import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import { useState } from "@wordpress/element";
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
+import "./editor.scss";
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import './editor.scss';
+export default function edit(props) {
+	const blockProps = useBlockProps({});
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {WPElement} Element to render.
- */
-export default function Edit() {
+	const ALLOWED_BLOCKS = [
+		"core/paragraph",
+		"core/columns",
+		"core/column",
+		"core/heading",
+	];
+	const TEMPLATE = [
+		[
+			"core/columns",
+			{},
+			[
+				[
+					"core/column",
+					{},
+					[["core/heading", { level: 2, placeholder: "Transcript" }]],
+				],
+				["core/column", {}, [["core/button", { text: "Expand" }]]],
+			],
+		],
+		["core/paragraph", { placeholder: "Add your transcript here." }],
+	];
+
+	const { attributes, setAttributes } = props;
+	const { buttonText } = attributes;
+	const { expandedTranscript, setExpandedTranscript } = useState(false);
+
+	const expandTranscript = () => {
+		console.log(expandedTranscript);
+		setExpandedTranscript(true);
+	};
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'Transcription Block – hello from the editor!',
-				'transcription-block'
-			) }
-		</p>
+		<div {...blockProps}>
+			{/* <header className="transcription-header">
+				<h3>Transcript</h3>
+				<Button
+					className="transcription-expand-button"
+					onClick={expandTranscript}
+				>
+					{buttonText}
+				</Button>
+			</header>
+			<div
+				className={
+					`transcription-text-box ` + expandedTranscript ? `hide` : null
+				}
+			> */}
+			<InnerBlocks allowedBlocks={ALLOWED_BLOCKS} template={TEMPLATE} />
+			{/* </div> */}
+		</div>
 	);
 }
